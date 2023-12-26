@@ -1,3 +1,47 @@
+This is a fork from git://git.suckless.org/dmenu
+------------
+Get dmenu up and running on macos.
+
+
+Additional Installation
+------------
+
+Install [XQuartz](https://www.xquartz.org):
+
+```
+brew install --cask xquartz
+```
+
+**`config.mk` changes are already made in this repo**
+
+Credits:
+
+- reddit.com/r/unixporn/comments/xpnwf0/comment/iq4vjcz
+- reddit.com/r/suckless/comments/nu8by3/comment/i1vity6
+
+Edit the `config.mk` file:
+
+```
+X11INC = /opt/X11/include
+X11LIB = /opt/X11/lib
+
+FREETYPEINC = /opt/homebrew/include/freetype2
+```
+
+THEN FOLLOW NORMAL BUILD INSTRUCTIONS (e.g. `make clean install`)
+
+**Note** that we must set the shell environment variable `DISPLAY=:0`
+where dmenu is launched, which tells dmenu that it should open in XQuartz.
+
+An example keybind in [skhd](https://github.com/koekeishiya/skhd) is:
+
+```
+cmd + shift - return : open -a "Xquartz" && export DISPLAY=:0 && cd /Applications; ls -d *.app | dmenu | xargs -I {} open "{}"
+```
+
+as per [my comment](https://www.reddit.com/r/unixporn/comments/xpnwf0/comment/keb3j04)
+
+
 dmenu - dynamic menu
 ====================
 dmenu is an efficient dynamic menu for X.
